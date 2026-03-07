@@ -21,58 +21,44 @@ We wanted to:
 
 ---
 
-## CI/CD Flow Diagram
+## CI/CD Flow
 
-  [Code Push]
-         │
-         ▼
-  ┌───────────────────┐
-  │ GitHub Repository │
-  │  - Source code    │
-  │  - Jenkinsfile    │
-  └───────────────────┘
-         │
-         ▼
-  ┌───────────────────────────┐
-  │ GitHub Actions (CI Build) │
-  │  - Checkout repo          │
-  │  - Build Docker image     │
-  │  - Push to Docker Hub     │
-  └───────────────────────────┘
-         │
-         ▼
-  ┌───────────────────────────┐
-  │ Docker Hub (Registry)     │
-  │  - Stores latest image    │
-  └───────────────────────────┘
-         │
-         ▼  (GitHub webhook triggers)
-  ┌───────────────────────────┐
-  │ Jenkins (Deployment CI/CD)│
-  │  - Pull repo              │
-  │  - Read Jenkinsfile       │
-  │  - Run kubectl commands   │
-  │    • delete old job       │
-  │    • apply new job        │
-  │    • wait for completion  │
-  │    • fetch logs           │
-  └───────────────────────────┘
-         │
-         ▼
-  ┌───────────────────────────┐
-  │ Kubernetes Cluster        │
-  │  - Pulls image from Hub   │
-  │  - Runs Job (Playwright)  │
-  │  - Executes UI tests      │
-  └───────────────────────────┘
-         │
-         ▼
-  ┌───────────────────────────┐
-  │ Logs Returned to Jenkins  │
-  │  - View test output       │
-  │  - Success/Failure        │
-  └───────────────────────────┘
+Code Push
+   ↓
+**GitHub Repository**
+- Stores source code
+- Jenkinsfile included
 
+   ↓
+**GitHub Actions (CI Build)**
+- Checkout repo
+- Build Docker image
+- Push to Docker Hub
+
+   ↓
+**Docker Hub (Registry)**
+- Stores latest Docker image
+
+   ↓ *(GitHub webhook triggers)*
+**Jenkins (Deployment CI/CD)**
+- Pull repo
+- Read Jenkinsfile
+- Run kubectl commands:
+  - Delete old job
+  - Apply new job
+  - Wait for completion
+  - Fetch logs
+
+   ↓
+**Kubernetes Cluster**
+- Pull image from Docker Hub
+- Run Job (Playwright)
+- Execute UI tests
+
+   ↓
+**Logs Returned to Jenkins**
+- View test output
+- Success / Failure
 
 ## Step-by-Step Explanation
 
