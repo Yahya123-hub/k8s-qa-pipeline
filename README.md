@@ -16,6 +16,10 @@ This project implements a **full CI/CD pipeline** for automated Playwright test 
 ## CI/CD Flow
 ![diagram](https://github.com/user-attachments/assets/8230a61d-187a-4db2-8430-ee210bbf01a8)
 
+##Kubernetes Flow
+![kubernetes flow](https://github.com/user-attachments/assets/f1b72ad8-ded9-4be5-bbe5-986b72671dcf)
+
+
 ## Learning Outcomes 
 
 - **Understand CI/CD toolchain:** GitHub Actions → Jenkins → Kubernetes  
